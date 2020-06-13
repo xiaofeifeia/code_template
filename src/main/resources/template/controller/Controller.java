@@ -10,8 +10,9 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 /****
- * @Author:xph
+ * @Author:shenkunlin
  * @Description:
+ * @Date 2019/6/14 0:18
  *****/
 <#if swagger==true>@Api(value = "${Table}Controller")</#if>
 @RestController
@@ -23,138 +24,138 @@ public class ${Table}Controller {
     private ${Table}Service ${table}Service;
 
     /***
-     * ${Table}鍒嗛〉鏉′欢鎼滅储瀹炵幇
+     * ${Table}分页条件搜索实现
      * @param ${table}
      * @param page
      * @param size
      * @return
      */
     <#if swagger==true>
-    @ApiOperation(value = "${Table}鏉′欢鍒嗛〉鏌ヨ",notes = "鍒嗛〉鏉′欢鏌ヨ${Table}鏂规硶璇︽儏",tags = {"${Table}Controller"})
+    @ApiOperation(value = "${Table}条件分页查询",notes = "分页条件查询${Table}方法详情",tags = {"${Table}Controller"})
     @ApiImplicitParams({
-            @ApiImplicitParam(paramType = "path", name = "page", value = "褰撳墠椤�", required = true, dataType = "Integer"),
-            @ApiImplicitParam(paramType = "path", name = "size", value = "姣忛〉鏄剧ず鏉℃暟", required = true, dataType = "Integer")
+            @ApiImplicitParam(paramType = "path", name = "page", value = "当前页", required = true, dataType = "Integer"),
+            @ApiImplicitParam(paramType = "path", name = "size", value = "每页显示条数", required = true, dataType = "Integer")
     })
     </#if>
     @PostMapping(value = "/search/{page}/{size}" )
-    public Result<PageInfo> findPage(@RequestBody(required = false) <#if swagger==true>@ApiParam(name = "${Table}瀵硅薄",value = "浼犲叆JSON鏁版嵁",required = false)</#if> ${Table} ${table}, @PathVariable  int page, @PathVariable  int size){
-        //璋冪敤${Table}Service瀹炵幇鍒嗛〉鏉′欢鏌ヨ${Table}
+    public Result<PageInfo> findPage(@RequestBody(required = false) <#if swagger==true>@ApiParam(name = "${Table}对象",value = "传入JSON数据",required = false)</#if> ${Table} ${table}, @PathVariable  int page, @PathVariable  int size){
+        //调用${Table}Service实现分页条件查询${Table}
         PageInfo<${Table}> pageInfo = ${table}Service.findPage(${table}, page, size);
-        return new Result(true,StatusCode.OK,"鏌ヨ鎴愬姛",pageInfo);
+        return new Result(true,StatusCode.OK,"查询成功",pageInfo);
     }
 
     /***
-     * ${Table}鍒嗛〉鎼滅储瀹炵幇
-     * @param page:褰撳墠椤�
-     * @param size:姣忛〉鏄剧ず澶氬皯鏉�
+     * ${Table}分页搜索实现
+     * @param page:当前页
+     * @param size:每页显示多少条
      * @return
      */
     <#if swagger==true>
-    @ApiOperation(value = "${Table}鍒嗛〉鏌ヨ",notes = "鍒嗛〉鏌ヨ${Table}鏂规硶璇︽儏",tags = {"${Table}Controller"})
+    @ApiOperation(value = "${Table}分页查询",notes = "分页查询${Table}方法详情",tags = {"${Table}Controller"})
     @ApiImplicitParams({
-            @ApiImplicitParam(paramType = "path", name = "page", value = "褰撳墠椤�", required = true, dataType = "Integer"),
-            @ApiImplicitParam(paramType = "path", name = "size", value = "姣忛〉鏄剧ず鏉℃暟", required = true, dataType = "Integer")
+            @ApiImplicitParam(paramType = "path", name = "page", value = "当前页", required = true, dataType = "Integer"),
+            @ApiImplicitParam(paramType = "path", name = "size", value = "每页显示条数", required = true, dataType = "Integer")
     })
     </#if>
     @GetMapping(value = "/search/{page}/{size}" )
     public Result<PageInfo> findPage(@PathVariable  int page, @PathVariable  int size){
-        //璋冪敤${Table}Service瀹炵幇鍒嗛〉鏌ヨ${Table}
+        //调用${Table}Service实现分页查询${Table}
         PageInfo<${Table}> pageInfo = ${table}Service.findPage(page, size);
-        return new Result<PageInfo>(true,StatusCode.OK,"鏌ヨ鎴愬姛",pageInfo);
+        return new Result<PageInfo>(true,StatusCode.OK,"查询成功",pageInfo);
     }
 
     /***
-     * 澶氭潯浠舵悳绱㈠搧鐗屾暟鎹�
+     * 多条件搜索品牌数据
      * @param ${table}
      * @return
      */
     <#if swagger==true>
-    @ApiOperation(value = "${Table}鏉′欢鏌ヨ",notes = "鏉′欢鏌ヨ${Table}鏂规硶璇︽儏",tags = {"${Table}Controller"})
+    @ApiOperation(value = "${Table}条件查询",notes = "条件查询${Table}方法详情",tags = {"${Table}Controller"})
     </#if>
     @PostMapping(value = "/search" )
-    public Result<List<${Table}>> findList(@RequestBody(required = false) <#if swagger==true>@ApiParam(name = "${Table}瀵硅薄",value = "浼犲叆JSON鏁版嵁",required = false)</#if> ${Table} ${table}){
-        //璋冪敤${Table}Service瀹炵幇鏉′欢鏌ヨ${Table}
+    public Result<List<${Table}>> findList(@RequestBody(required = false) <#if swagger==true>@ApiParam(name = "${Table}对象",value = "传入JSON数据",required = false)</#if> ${Table} ${table}){
+        //调用${Table}Service实现条件查询${Table}
         List<${Table}> list = ${table}Service.findList(${table});
-        return new Result<List<${Table}>>(true,StatusCode.OK,"鏌ヨ鎴愬姛",list);
+        return new Result<List<${Table}>>(true,StatusCode.OK,"查询成功",list);
     }
 
     /***
-     * 鏍规嵁ID鍒犻櫎鍝佺墝鏁版嵁
+     * 根据ID删除品牌数据
      * @param id
      * @return
      */
     <#if swagger==true>
-    @ApiOperation(value = "${Table}鏍规嵁ID鍒犻櫎",notes = "鏍规嵁ID鍒犻櫎${Table}鏂规硶璇︽儏",tags = {"${Table}Controller"})
-    @ApiImplicitParam(paramType = "path", name = "id", value = "涓婚敭ID", required = true, dataType = "${keyType}")
+    @ApiOperation(value = "${Table}根据ID删除",notes = "根据ID删除${Table}方法详情",tags = {"${Table}Controller"})
+    @ApiImplicitParam(paramType = "path", name = "id", value = "主键ID", required = true, dataType = "${keyType}")
     </#if>
     @DeleteMapping(value = "/{id}" )
     public Result delete(@PathVariable ${keyType} id){
-        //璋冪敤${Table}Service瀹炵幇鏍规嵁涓婚敭鍒犻櫎
+        //调用${Table}Service实现根据主键删除
         ${table}Service.delete(id);
-        return new Result(true,StatusCode.OK,"鍒犻櫎鎴愬姛");
+        return new Result(true,StatusCode.OK,"删除成功");
     }
 
     /***
-     * 淇敼${Table}鏁版嵁
+     * 修改${Table}数据
      * @param ${table}
      * @param id
      * @return
      */
     <#if swagger==true>
-    @ApiOperation(value = "${Table}鏍规嵁ID淇敼",notes = "鏍规嵁ID淇敼${Table}鏂规硶璇︽儏",tags = {"${Table}Controller"})
-    @ApiImplicitParam(paramType = "path", name = "id", value = "涓婚敭ID", required = true, dataType = "${keyType}")
+    @ApiOperation(value = "${Table}根据ID修改",notes = "根据ID修改${Table}方法详情",tags = {"${Table}Controller"})
+    @ApiImplicitParam(paramType = "path", name = "id", value = "主键ID", required = true, dataType = "${keyType}")
     </#if>
     @PutMapping(value="/{id}")
-    public Result update(@RequestBody <#if swagger==true>@ApiParam(name = "${Table}瀵硅薄",value = "浼犲叆JSON鏁版嵁",required = false)</#if> ${Table} ${table},@PathVariable ${keyType} id){
-        //璁剧疆涓婚敭鍊�
+    public Result update(@RequestBody <#if swagger==true>@ApiParam(name = "${Table}对象",value = "传入JSON数据",required = false)</#if> ${Table} ${table},@PathVariable ${keyType} id){
+        //设置主键值
         ${table}.${keySetMethod}(id);
-        //璋冪敤${Table}Service瀹炵幇淇敼${Table}
+        //调用${Table}Service实现修改${Table}
         ${table}Service.update(${table});
-        return new Result(true,StatusCode.OK,"淇敼鎴愬姛");
+        return new Result(true,StatusCode.OK,"修改成功");
     }
 
     /***
-     * 鏂板${Table}鏁版嵁
+     * 新增${Table}数据
      * @param ${table}
      * @return
      */
     <#if swagger==true>
-    @ApiOperation(value = "${Table}娣诲姞",notes = "娣诲姞${Table}鏂规硶璇︽儏",tags = {"${Table}Controller"})
+    @ApiOperation(value = "${Table}添加",notes = "添加${Table}方法详情",tags = {"${Table}Controller"})
     </#if>
     @PostMapping
-    public Result add(@RequestBody  <#if swagger==true>@ApiParam(name = "${Table}瀵硅薄",value = "浼犲叆JSON鏁版嵁",required = true)</#if> ${Table} ${table}){
-        //璋冪敤${Table}Service瀹炵幇娣诲姞${Table}
+    public Result add(@RequestBody  <#if swagger==true>@ApiParam(name = "${Table}对象",value = "传入JSON数据",required = true)</#if> ${Table} ${table}){
+        //调用${Table}Service实现添加${Table}
         ${table}Service.add(${table});
-        return new Result(true,StatusCode.OK,"娣诲姞鎴愬姛");
+        return new Result(true,StatusCode.OK,"添加成功");
     }
 
     /***
-     * 鏍规嵁ID鏌ヨ${Table}鏁版嵁
+     * 根据ID查询${Table}数据
      * @param id
      * @return
      */
     <#if swagger==true>
-    @ApiOperation(value = "${Table}鏍规嵁ID鏌ヨ",notes = "鏍规嵁ID鏌ヨ${Table}鏂规硶璇︽儏",tags = {"${Table}Controller"})
-    @ApiImplicitParam(paramType = "path", name = "id", value = "涓婚敭ID", required = true, dataType = "${keyType}")
+    @ApiOperation(value = "${Table}根据ID查询",notes = "根据ID查询${Table}方法详情",tags = {"${Table}Controller"})
+    @ApiImplicitParam(paramType = "path", name = "id", value = "主键ID", required = true, dataType = "${keyType}")
     </#if>
     @GetMapping("/{id}")
     public Result<${Table}> findById(@PathVariable ${keyType} id){
-        //璋冪敤${Table}Service瀹炵幇鏍规嵁涓婚敭鏌ヨ${Table}
+        //调用${Table}Service实现根据主键查询${Table}
         ${Table} ${table} = ${table}Service.findById(id);
-        return new Result<${Table}>(true,StatusCode.OK,"鏌ヨ鎴愬姛",${table});
+        return new Result<${Table}>(true,StatusCode.OK,"查询成功",${table});
     }
 
     /***
-     * 鏌ヨ${Table}鍏ㄩ儴鏁版嵁
+     * 查询${Table}全部数据
      * @return
      */
     <#if swagger==true>
-    @ApiOperation(value = "鏌ヨ鎵�鏈�${Table}",notes = "鏌ヨ鎵�${Table}鏈夋柟娉曡鎯�",tags = {"${Table}Controller"})
+    @ApiOperation(value = "查询所有${Table}",notes = "查询所${Table}有方法详情",tags = {"${Table}Controller"})
     </#if>
     @GetMapping
     public Result<List<${Table}>> findAll(){
-        //璋冪敤${Table}Service瀹炵幇鏌ヨ鎵�鏈�${Table}
+        //调用${Table}Service实现查询所有${Table}
         List<${Table}> list = ${table}Service.findAll();
-        return new Result<List<${Table}>>(true, StatusCode.OK,"鏌ヨ鎴愬姛",list) ;
+        return new Result<List<${Table}>>(true, StatusCode.OK,"查询成功",list) ;
     }
 }
