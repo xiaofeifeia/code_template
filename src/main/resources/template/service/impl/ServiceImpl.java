@@ -9,10 +9,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import tk.mybatis.mapper.entity.Example;
 import java.util.List;
-/****
+/**
  * @Author:xph
  * @Description:${Table}业务层接口实现类
- *****/
+ */
 @Service
 public class ${Table}ServiceImpl implements ${Table}Service {
 

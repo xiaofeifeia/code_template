@@ -9,10 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
-/****
+/**
  * @Author:xph
  * @Description:
- *****/
+ */
 <#if swagger==true>@Api(value = "${Table}Controller")</#if>
 @RestController
 @RequestMapping("/${table}")
@@ -22,7 +22,7 @@ public class ${Table}Controller {
     @Autowired
     private ${Table}Service ${table}Service;
 
-    /***
+    /**
      * ${Table}分页条件搜索实现
      * @param ${table}
      * @param page
@@ -43,7 +43,7 @@ public class ${Table}Controller {
         return new Result(true,StatusCode.OK,"查询成功",pageInfo);
     }
 
-    /***
+    /**
      * ${Table}分页搜索实现
      * @param page:当前页
      * @param size:每页显示多少条
@@ -63,7 +63,7 @@ public class ${Table}Controller {
         return new Result<PageInfo>(true,StatusCode.OK,"查询成功",pageInfo);
     }
 
-    /***
+    /**
      * 多条件搜索品牌数据
      * @param ${table}
      * @return
@@ -78,7 +78,7 @@ public class ${Table}Controller {
         return new Result<List<${Table}>>(true,StatusCode.OK,"查询成功",list);
     }
 
-    /***
+    /**
      * 根据ID删除品牌数据
      * @param id
      * @return
@@ -94,7 +94,7 @@ public class ${Table}Controller {
         return new Result(true,StatusCode.OK,"删除成功");
     }
 
-    /***
+    /**
      * 修改${Table}数据
      * @param ${table}
      * @param id
@@ -113,7 +113,7 @@ public class ${Table}Controller {
         return new Result(true,StatusCode.OK,"修改成功");
     }
 
-    /***
+    /**
      * 新增${Table}数据
      * @param ${table}
      * @return
@@ -128,7 +128,7 @@ public class ${Table}Controller {
         return new Result(true,StatusCode.OK,"添加成功");
     }
 
-    /***
+    /**
      * 根据ID查询${Table}数据
      * @param id
      * @return
@@ -144,7 +144,7 @@ public class ${Table}Controller {
         return new Result<${Table}>(true,StatusCode.OK,"查询成功",${table});
     }
 
-    /***
+    /**
      * 查询${Table}全部数据
      * @return
      */

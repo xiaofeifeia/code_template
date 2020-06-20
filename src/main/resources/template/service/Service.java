@@ -2,13 +2,13 @@ package ${package_service};
 import ${package_entity}.${Table};
 import com.github.pagehelper.PageInfo;
 import java.util.List;
-/****
+/**
  * @Author:xph
  * @Description:${Table}业务层接口
- *****/
+ */
 public interface ${Table}Service {
 
-    /***
+    /**
      * ${Table}多条件分页查询
      * @param ${table}
      * @param page
@@ -17,7 +17,7 @@ public interface ${Table}Service {
      */
     PageInfo<${Table}> findPage(${Table} ${table}, int page, int size);
 
-    /***
+    /**
      * ${Table}分页查询
      * @param page
      * @param size
@@ -25,26 +25,26 @@ public interface ${Table}Service {
      */
     PageInfo<${Table}> findPage(int page, int size);
 
-    /***
+    /**
      * ${Table}多条件搜索方法
      * @param ${table}
      * @return
      */
     List<${Table}> findList(${Table} ${table});
 
-    /***
+    /**
      * 删除${Table}
      * @param id
      */
     void delete(${keyType} id);
 
-    /***
+    /**
      * 修改${Table}数据
      * @param ${table}
      */
     void update(${Table} ${table});
 
-    /***
+    /**
      * 新增${Table}
      * @param ${table}
      */
@@ -57,7 +57,7 @@ public interface ${Table}Service {
      */
      ${Table} findById(${keyType} id);
 
-    /***
+    /**
      * 查询所有${Table}
      * @return
      */
